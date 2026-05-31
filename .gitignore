@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vault баримтын junction (Obsidian) — эх сурвалж repo-д биш, зөвхөн локал холбоос
+/docs
+
+# локал dev артефакт
+/dev.log
+/*.local.html

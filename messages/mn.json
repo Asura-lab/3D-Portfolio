@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "title": "ASURA — Full-stack хөгжүүлэгч",
+    "description": "Монголын full-stack хөгжүүлэгч — вэб болон мобайл аппликейшнийг бүтнээр нь бүтээдэг, санхүүгийн зах зээлийн machine learning-д төвлөрдөг. Freelance ажилд нээлттэй."
+  },
+  "nav": {
+    "about": "Миний тухай",
+    "skills": "Чадвар",
+    "work": "Ажлууд",
+    "lab": "Лаборатори",
+    "contact": "Холбоо барих",
+    "availability": "Freelance-д нээлттэй"
+  },
+  "hero": {
+    "eyebrow": "Full-stack хөгжүүлэгч · Монгол",
+    "name": "ASURA",
+    "headline": "Вэб болон апп — эхнээс нь эцэс хүртэл.",
+    "subline": "Интерфэйсээс backend дэд бүтэц хүртэл — санхүүгийн зах зээлийн machine learning-д онцгой анхаарлаар.",
+    "cta": "Ажлуудыг үзэх",
+    "scrollHint": "Доош гүйлгэнэ үү"
+  },
+  "about": {
+    "label": "Миний тухай",
+    "heading": "Дотроо бат бөх, гадаргуу дээрээ хялбар мэдрэгддэг software.",
+    "body": "Намайг ASURA гэдэг — Монголын full-stack хөгжүүлэгч, Computer Science-ээр төгсөх дөхсөн (2021–2026). Код бичих эхэндээ хичээл байсан ч аяндаа хамгийн дуртай ажил маань болсон.",
+    "body2": "Гол анхаарлаа вэб болон апп хөгжүүлэлтэд хандуулдаг — интерфэйсээс backend дэд бүтэц хүртэл бүтнээр нь бүтээдэг. Ялангуяа санхүүгийн зах зээлд зориулсан machine learning, deep learning загварт сонирхолтой, мөн embedded system хөгжүүлж байсан туршлагатай.",
+    "educationLabel": "Боловсрол",
+    "education": "Шинэ Монгол Технологийн Коллеж — Computer Science (2021–2026)",
+    "locationLabel": "Байршил",
+    "location": "Монгол",
+    "focusLabel": "Чиглэл",
+    "focus": "Вэб & апп хөгжүүлэлт · санхүүгийн ML/DL",
+    "languagesLabel": "Хэл",
+    "languages": "Монгол (төрөлх) · Англи · Япон"
+  },
+  "skills": {
+    "label": "Чадвар",
+    "heading": "Миний голцуу ашигладаг хэрэгслүүд.",
+    "groups": [
+      {
+        "title": "Вэб & Апп",
+        "note": "гол",
+        "items": ["Next.js", "React", "React Native", "TypeScript", "Tailwind CSS", "Node.js", "Express", "REST APIs"]
+      },
+      {
+        "title": "Backend & Дэд бүтэц",
+        "note": "",
+        "items": ["PostgreSQL", "Prisma", "Redis", "BullMQ", "AWS", "Cloudflare R2", "Vercel", "GitHub Actions"]
+      },
+      {
+        "title": "Санхүүгийн ML / DL",
+        "note": "сонирхол",
+        "items": ["Python", "PyTorch", "Stable-Baselines3", "Gymnasium", "MLflow", "Optuna"]
+      },
+      {
+        "title": "Embedded",
+        "note": "",
+        "items": ["C / C++", "Microcontrollers"]
+      },
+      {
+        "title": "3D / Креатив",
+        "note": "сурч буй",
+        "items": ["Three.js", "React Three Fiber", "GSAP", "Lenis", "GLSL"]
+      }
+    ]
+  },
+  "work": {
+    "label": "Шилдэг ажлууд",
+    "heading": "Миний бүтээсэн зарим зүйл.",
+    "note": "Вэб, апп болон хэрэглээний ML чиглэлийн сонгомол төслүүд.",
+    "moreLabel": "GitHub дээр илүү ихийг",
+    "projects": [
+      {
+        "name": "Dropshipping Platform",
+        "tag": "Вэб & Мобайл",
+        "year": "2024–2025",
+        "role": "Full-stack",
+        "stack": ["Next.js", "TypeScript", "React Native", "Node / Express", "PostgreSQL", "Prisma", "Redis", "BullMQ"],
+        "description": "Монголд зориулсан бүрэн commerce платформ: нэг design system хуваалцсан 4 апп (хэрэглэгчийн вэб & мобайл, жолооч, админ), гааль/валют/хүргэлтийн автомат тооцоотой.",
+        "highlight": "4 апп · нэг design system · SSR / SEO"
+      },
+      {
+        "name": "Portfolio Optimization",
+        "tag": "ML / DL · Санхүү",
+        "year": "2024",
+        "role": "Судалгаа & инженерчлэл",
+        "stack": ["Python", "PyTorch", "Stable-Baselines3", "Gymnasium", "MLflow", "Optuna"],
+        "description": "Портфелийн хуваарилалтын reinforcement-learning agent-ууд — leak-free temporal split, өгөөж/зардал/drawdown-оор тохируулсан reward-той.",
+        "highlight": "Sharpe 0.873 · Calmar 0.543 · CAGR 17.5%"
+      },
+      {
+        "name": "MT5 Trading Bot",
+        "tag": "Систематик худалдаа",
+        "year": "2023–2024",
+        "role": "Судалгаа & инженерчлэл",
+        "stack": ["Python", "MQL5", "MT5 API", "Backtesting.py", "Streamlit", "Telegram"],
+        "description": "Дүрэмд суурилсан судалгааны систем — regime detection (ADX / CHOP / ATR), look-ahead-bias-гүй олон-timeframe логик, walk-forward баталгаажуулалт.",
+        "highlight": "Regime detection · walk-forward баталгаажуулалт"
+      },
+      {
+        "name": "Lucentia",
+        "tag": "Real-time backend · Систем",
+        "year": "2023–",
+        "role": "Backend & системийн дизайн",
+        "stack": ["Node.js", "TypeScript", "PostgreSQL", "Prisma"],
+        "description": "Детерминист, server-authoritative real-time engine — anti-cheat, эдийн засаг, өгөгдлийн загварчлалд төвлөрсөн. Backend ба системийн дизайны судалгаа.",
+        "highlight": "Детерминист · server-authoritative · anti-cheat"
+      }
+    ]
+  },
+  "lab": {
+    "label": "Лаборатори",
+    "heading": "Үргэлжилж буй туршилтууд.",
+    "body": "Захиалгад багтдаггүй зүйлсийн орон зай — shader, 3D, interaction судалгаа. Энэ сайт өөрөө тэдгээрийн нэг: React Three Fiber, GSAP, Lenis-ээр бүтээгдсэн.",
+    "status": "Хийгдэж байна"
+  },
+  "contact": {
+    "label": "Холбоо барих",
+    "heading": "Хамтдаа нэгийг бүтээе.",
+    "body": "Би одоо freelance ажилд нээлттэй. Надтай холбогдох хамгийн сайн арга бол GitHub.",
+    "cta": "GitHub-аар холбогдох",
+    "github": "github.com/Asura-lab",
+    "availability": "Freelance-д нээлттэй"
+  },
+  "footer": {
+    "tagline": "ASURA зохион бүтээв.",
+    "tech": "Next.js · React Three Fiber · GSAP · Lenis",
+    "copyright": "© {year} ASURA"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "title": "ASURA — Full-stack Developer",
+    "description": "Full-stack developer from Mongolia building web and mobile apps end to end, with a focus on machine learning for financial markets. Available for freelance."
+  },
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "work": "Work",
+    "lab": "Lab",
+    "contact": "Contact",
+    "availability": "Available for freelance"
+  },
+  "hero": {
+    "eyebrow": "Full-stack developer · Mongolia",
+    "name": "ASURA",
+    "headline": "I build web & apps, end to end.",
+    "subline": "From interface to infrastructure — with a focus on machine learning for financial markets.",
+    "cta": "View work",
+    "scrollHint": "Scroll to explore"
+  },
+  "about": {
+    "label": "About",
+    "heading": "Software that's solid underneath and effortless on the surface.",
+    "body": "I'm ASURA — a full-stack developer from Mongolia, finishing my Computer Science degree (2021–2026). Coding started as coursework and quietly became the thing I'd pick over anything else.",
+    "body2": "I focus on web and app development, building products end to end — from interface to infrastructure. I'm especially into machine learning and deep learning for financial markets, and I've also built embedded systems.",
+    "educationLabel": "Education",
+    "education": "New Mongol College of Technology — Computer Science (2021–2026)",
+    "locationLabel": "Based in",
+    "location": "Mongolia",
+    "focusLabel": "Focus",
+    "focus": "Web & app development · ML/DL for finance",
+    "languagesLabel": "Languages",
+    "languages": "Mongolian (native) · English · Japanese"
+  },
+  "skills": {
+    "label": "Skills",
+    "heading": "Tools I reach for.",
+    "groups": [
+      {
+        "title": "Web & App",
+        "note": "core",
+        "items": ["Next.js", "React", "React Native", "TypeScript", "Tailwind CSS", "Node.js", "Express", "REST APIs"]
+      },
+      {
+        "title": "Backend & Infra",
+        "note": "",
+        "items": ["PostgreSQL", "Prisma", "Redis", "BullMQ", "AWS", "Cloudflare R2", "Vercel", "GitHub Actions"]
+      },
+      {
+        "title": "ML / DL for finance",
+        "note": "interest",
+        "items": ["Python", "PyTorch", "Stable-Baselines3", "Gymnasium", "MLflow", "Optuna"]
+      },
+      {
+        "title": "Embedded",
+        "note": "",
+        "items": ["C / C++", "Microcontrollers"]
+      },
+      {
+        "title": "3D / Creative",
+        "note": "learning",
+        "items": ["Three.js", "React Three Fiber", "GSAP", "Lenis", "GLSL"]
+      }
+    ]
+  },
+  "work": {
+    "label": "Selected Work",
+    "heading": "A few things I've built.",
+    "note": "Selected projects across web, apps, and applied ML.",
+    "moreLabel": "More on GitHub",
+    "projects": [
+      {
+        "name": "Dropshipping Platform",
+        "tag": "Web & Mobile",
+        "year": "2024–2025",
+        "role": "Full-stack",
+        "stack": ["Next.js", "TypeScript", "React Native", "Node / Express", "PostgreSQL", "Prisma", "Redis", "BullMQ"],
+        "description": "An end-to-end commerce platform for Mongolia: four apps (user web & mobile, driver, admin) sharing one design system, with automated customs, currency, and delivery calculations.",
+        "highlight": "4 apps · one shared design system · SSR / SEO"
+      },
+      {
+        "name": "Portfolio Optimization",
+        "tag": "ML / DL · Finance",
+        "year": "2024",
+        "role": "Research & engineering",
+        "stack": ["Python", "PyTorch", "Stable-Baselines3", "Gymnasium", "MLflow", "Optuna"],
+        "description": "Reinforcement-learning agents for portfolio allocation with leak-free temporal splits and a reward shaped by return, cost, and drawdown.",
+        "highlight": "Sharpe 0.873 · Calmar 0.543 · CAGR 17.5%"
+      },
+      {
+        "name": "MT5 Trading Bot",
+        "tag": "Systematic trading",
+        "year": "2023–2024",
+        "role": "Research & engineering",
+        "stack": ["Python", "MQL5", "MT5 API", "Backtesting.py", "Streamlit", "Telegram"],
+        "description": "A rule-based research system with regime detection (ADX / CHOP / ATR), look-ahead-bias-free multi-timeframe logic, and walk-forward validation.",
+        "highlight": "Regime detection · walk-forward validation"
+      },
+      {
+        "name": "Lucentia",
+        "tag": "Real-time backend · Systems",
+        "year": "2023–",
+        "role": "Backend & system design",
+        "stack": ["Node.js", "TypeScript", "PostgreSQL", "Prisma"],
+        "description": "A deterministic, server-authoritative real-time engine — focused on anti-cheat, economy, and data modeling. A study in backend and systems design.",
+        "highlight": "Deterministic · server-authoritative · anti-cheat"
+      }
+    ]
+  },
+  "lab": {
+    "label": "Lab",
+    "heading": "Experiments in progress.",
+    "body": "A space for things that don't fit a brief — shaders, 3D, and interaction studies. This site itself is one of them: built with React Three Fiber, GSAP, and Lenis.",
+    "status": "In progress"
+  },
+  "contact": {
+    "label": "Contact",
+    "heading": "Let's build something.",
+    "body": "I'm currently available for freelance work. The best way to reach me is through GitHub.",
+    "cta": "Reach me on GitHub",
+    "github": "github.com/Asura-lab",
+    "availability": "Available for freelance"
+  },
+  "footer": {
+    "tagline": "Designed & built by ASURA.",
+    "tech": "Next.js · React Three Fiber · GSAP · Lenis",
+    "copyright": "© {year} ASURA"
+  }
+}

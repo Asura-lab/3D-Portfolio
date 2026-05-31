@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Design tokens — 02-design-language
+   "Тайван, гэхдээ амьд. Дэгжин, гэхдээ техникийн гүнтэй."
+   Гүн суурь (dark base) + ганц signature accent + том typography.
+   ============================================================ */
+@theme {
+  /* --- Өнгө: cinematic dark base --- */
+  --color-background: #0a0a0b; /* үндсэн дэвсгэр — бараг хар бэх */
+  --color-surface: #141418; /* карт / дээш гарсан гадаргуу */
+  --color-line: #26262c; /* нарийн зураас, хүрээ */
+  --color-foreground: #ededed; /* үндсэн текст */
+  --color-muted: #8b8b94; /* хоёрдогч текст */
+  --color-accent: #5eead4; /* signature accent (aurora mint) — CTA, hover, гэрэлтэлт */
+  --color-accent-ink: #04211c; /* accent дэвсгэр дээрх бараан текст */
+
+  /* --- Font: CSS хувьсагчид layout.tsx доторх next/font-оос ирнэ --- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-jp: var(--font-jp), var(--font-inter), sans-serif;
+}
+
+/* ============================================================
+   Base layer
+   ============================================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark; /* хөтөч UI-г (scrollbar г.м) бараан болгоно */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  /* ⚠️ Lenis momentum scroll ашиглах тул native `scroll-behavior: smooth`-г
+     ОРУУЛАХГҮЙ — хоёр scroll систем зөрөлдөж "чичирнэ" (01-tech-stack#0). */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  /* overscroll-г хязгаарлаж "цагаан гэрэлтэлт"-ээс сэргийлнэ */
+  overscroll-behavior: none;
+}
+
+/* Япон locale — CJK glyph-тэй фонт + илүү өндөр мөрийн зай (01-tech-stack#14) */
+:lang(ja) {
+  font-family: var(--font-jp);
+  line-height: 1.8;
+}
+
+/* Сонголтын (text selection) өнгийг accent-аар */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+/* Keyboard focus — 3D-ийн ард ч харагдахуйц байх ёстой (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   prefers-reduced-motion — заавал хүндэлнэ (02-design#7, ёс зүй).
+   Энэ тохиргоотой хэрэглэгчид бүх animation/parallax-г бараг унтраана.
+   (JS тал дээр Lenis-ийг бас эхлүүлэхгүй — SmoothScroll.tsx-г үз.)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
