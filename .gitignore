@@ -46,3 +46,6 @@ next-env.d.ts
 # локал dev артефакт
 /dev.log
 /*.local.html
+/*.local.log
+/shots
+/build.local.log

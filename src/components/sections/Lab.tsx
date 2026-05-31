@@ -43,11 +43,6 @@ export default function Lab() {
           </span>
         </Reveal>
       </div>
-
-      {/* 3D canvas-ийн ирээдүйн зай (placeholder) */}
-      <Reveal delay={0.1}>
-        <div className="mt-16 aspect-[16/7] w-full rounded-2xl border border-line bg-gradient-to-b from-surface to-background" />
-      </Reveal>
     </section>
   );
 }

@@ -1,8 +1,14 @@
+"use client";
+
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import Reveal from "@/components/Reveal";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AnimatedHeading from "@/components/AnimatedHeading";
 
-// Төслийн өгөгдлийн хэлбэр (messages JSON-оос t.raw-аар уншина)
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
 type Project = {
   name: string;
   tag: string;
@@ -13,94 +19,123 @@ type Project = {
   highlight: string;
 };
 
-// Work — сонгомол төслүүд (03-content#3). Мөр бүр scroll-д орохдоо дараалан reveal.
+// Work — desktop дээр хэсгийг pin хийж, төслүүдийг ХЭВТЭЭ scrub-аар үзүүлнэ
+// (GSAP ScrollTrigger — Lenis-тэй нэг ticker дээр). Mobile/reduced-motion дээр
+// энгийн босоо хураангуй (fallback).
 export default function Work() {
   const t = useTranslations("work");
   const projects = t.raw("projects") as Project[];
+  const root = useRef<HTMLElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(
+        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const trackEl = track.current;
+          const rootEl = root.current;
+          if (!trackEl || !rootEl) return;
+          const amount = () => trackEl.scrollWidth - window.innerWidth;
+          const tween = gsap.to(trackEl, {
+            x: () => -amount(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: rootEl,
+              start: "top top",
+              end: () => "+=" + amount(),
+              scrub: 1,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+          return () => tween.kill();
+        },
+      );
+    },
+    { scope: root },
+  );
 
   return (
     <section
       id="work"
-      className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28 md:py-40"
+      ref={root}
+      className="relative scroll-mt-24 md:h-screen md:overflow-hidden"
     >
-      <Reveal>
-        <div className="mb-12 flex items-center gap-3">
-          <span className="h-px w-8 bg-accent" />
-          <span className="text-xs uppercase tracking-[0.25em] text-accent">
-            {t("label")}
-          </span>
+      <div
+        ref={track}
+        className="flex flex-col gap-14 px-6 py-28 md:h-screen md:flex-row md:flex-nowrap md:items-center md:gap-10 md:px-[8vw] md:py-0"
+      >
+        {/* Intro panel */}
+        <div className="w-full shrink-0 md:w-[32vw]">
+          <div className="mb-8 flex items-center gap-3">
+            <span className="h-px w-8 bg-accent" />
+            <span className="text-xs uppercase tracking-[0.25em] text-accent">
+              {t("label")}
+            </span>
+          </div>
+          <AnimatedHeading
+            as="h2"
+            text={t("heading")}
+            className="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-tight tracking-tight text-foreground"
+          />
+          <p className="mt-5 max-w-sm text-muted">{t("note")}</p>
+          <p className="mt-8 hidden items-center gap-2 text-xs uppercase tracking-[0.25em] text-muted md:flex">
+            Scroll <span aria-hidden>→</span>
+          </p>
         </div>
-      </Reveal>
 
-      <AnimatedHeading
-        as="h2"
-        text={t("heading")}
-        className="max-w-3xl font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-tight tracking-tight text-foreground"
-      />
-      <Reveal delay={0.1}>
-        <p className="mt-4 max-w-xl text-muted">{t("note")}</p>
-      </Reveal>
-
-      {/* Төслийн жагсаалт */}
-      <div className="mt-16">
+        {/* Төслийн картууд */}
         {projects.map((p, i) => (
-          <Reveal key={p.name} delay={i * 0.06}>
-            <article className="group grid gap-6 border-t border-line py-10 md:grid-cols-12">
-              {/* Дугаар */}
-              <div className="font-display text-sm text-muted md:col-span-1">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-
-              {/* Нэр + tag + role/year */}
-              <div className="md:col-span-4">
-                <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground transition-colors group-hover:text-accent">
-                  {p.name}
-                </h3>
-                <p className="mt-2 text-sm text-accent">{p.tag}</p>
-                <p className="mt-1 text-xs text-muted">
-                  {p.role} · {p.year}
-                </p>
-              </div>
-
-              {/* Тайлбар + highlight + stack */}
-              <div className="md:col-span-7">
-                <p className="leading-relaxed text-muted">{p.description}</p>
-                <p className="mt-3 text-sm text-foreground">{p.highlight}</p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <li
-                      key={s}
-                      className="rounded-full border border-line px-3 py-1 text-xs text-muted transition-colors group-hover:border-foreground/30"
-                    >
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          </Reveal>
+          <article
+            key={p.name}
+            className="flex w-full shrink-0 flex-col rounded-2xl border border-line bg-surface/40 p-8 backdrop-blur-sm md:w-[36vw]"
+          >
+            <div className="font-display text-sm text-muted">
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
+              {p.name}
+            </h3>
+            <p className="mt-2 text-sm text-accent">{p.tag}</p>
+            <p className="mt-1 text-xs text-muted">
+              {p.role} · {p.year}
+            </p>
+            <p className="mt-5 leading-relaxed text-muted">{p.description}</p>
+            <p className="mt-3 text-sm text-foreground">{p.highlight}</p>
+            <ul className="mt-auto flex flex-wrap gap-2 pt-6">
+              {p.stack.map((s) => (
+                <li
+                  key={s}
+                  className="rounded-full border border-line px-3 py-1 text-xs text-muted"
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </article>
         ))}
-      </div>
 
-      {/* GitHub руу */}
-      <Reveal>
-        <div className="mt-12 border-t border-line pt-8">
+        {/* Төгсгөлийн GitHub panel */}
+        <div className="flex w-full shrink-0 items-center md:w-[22vw]">
           <a
             href="https://github.com/Asura-lab"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+            className="group inline-flex items-center gap-2 text-base text-foreground transition-colors hover:text-accent"
           >
             {t("moreLabel")}
             <span
               aria-hidden
-              className="transition-transform group-hover:translate-x-0.5"
+              className="transition-transform group-hover:translate-x-1"
             >
               →
             </span>
           </a>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

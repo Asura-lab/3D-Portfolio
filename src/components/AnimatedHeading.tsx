@@ -1,32 +1,31 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion, type Variants } from "motion/react";
 
 type Tag = "h1" | "h2" | "h3";
-
-// Motion-ийн харгалзах tag-ууд (typed)
 const MOTION_TAG = { h1: motion.h1, h2: motion.h2, h3: motion.h3 } as const;
 
-// Контейнер — үгсийг дараалан (stagger) гаргана
+// Контейнер → үг бүрийг дараалуулна
 const container: Variants = {
   hidden: {},
   visible: (delay = 0) => ({
-    transition: { staggerChildren: 0.06, delayChildren: delay },
+    transition: { staggerChildren: 0.05, delayChildren: delay },
   }),
 };
-
-// Үг бүр доороос мандаж, бүдгээс тод болно.
-// (reduced-motion үед MotionConfig нь y-г унтрааж зөвхөн opacity-г үлдээнэ.)
-const word: Variants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-  },
+// Үг → дотроо үсгүүдээ дараалуулна
+const wordV: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.025 } },
+};
+// Үсэг бүр доороос мандана (mask доторх "rise"). reduced-motion үед MotionConfig
+// transform-ийг унтрааж зөвхөн харагдана.
+const charV: Variants = {
+  hidden: { y: "115%" },
+  visible: { y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
-// Cinematic гарчиг — текстийг үг болгон хувааж stagger-аар reveal хийнэ (02-design#5).
+// Cinematic гарчиг — текстийг ҮСЭГ үсгээр mask reveal (SplitText маягийн).
 export default function AnimatedHeading({
   text,
   as = "h2",
@@ -38,7 +37,6 @@ export default function AnimatedHeading({
   className?: string;
   delay?: number;
 }) {
-  // Union (h1|h2|h3)-ийг нэг тодорхой motion төрөл рүү cast — props ижил тул аюулгүй
   const MTag = MOTION_TAG[as] as typeof motion.h1;
   const words = text.split(" ");
 
@@ -50,17 +48,28 @@ export default function AnimatedHeading({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+      aria-label={text}
     >
-      {words.map((w, i) => (
-        <motion.span
-          key={`${w}-${i}`}
-          variants={word}
-          className="inline-block whitespace-pre"
-        >
-          {w}
-          {i < words.length - 1 ? " " : ""}
-        </motion.span>
-      ))}
+      {words.map((word, wi) => {
+        // Сүүлчийнхээс бусдад зайны (nbsp) тэмдэгт нэмж үгсийн хооронд зай үүсгэнэ.
+        // Үг бүр inline-block (атом) тул дотор нь мөр таслахгүй (mid-word break-гүй).
+        const chars = wi < words.length - 1 ? [...word, " "] : [...word];
+        return (
+          <Fragment key={wi}>
+            <motion.span
+              variants={wordV}
+              aria-hidden
+              className="inline-block overflow-hidden pb-[0.12em] align-bottom"
+            >
+              {chars.map((ch, ci) => (
+                <motion.span key={ci} variants={charV} className="inline-block">
+                  {ch}
+                </motion.span>
+              ))}
+            </motion.span>
+          </Fragment>
+        );
+      })}
     </MTag>
   );
 }

@@ -31,6 +31,8 @@ export default function SmoothScroll({
     // default-аар унтраалттай (native touch илүү жигд).
     const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
     setLenis(lenis);
+    // Тест/дебаг: Lenis instance-ийг window дээр ил гаргана (Playwright scroll-д)
+    (window as Window & { __lenis?: Lenis }).__lenis = lenis;
 
     // Lenis scroll → ScrollTrigger шинэчлэх (хоёрыг синхрончилно)
     lenis.on("scroll", ScrollTrigger.update);

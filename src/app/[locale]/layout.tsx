@@ -10,6 +10,9 @@ import {
 import { routing } from "@/i18n/routing";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ScrollProgress";
+import CustomCursor from "@/components/CustomCursor";
+import Loader from "@/components/Loader";
+import Background3DLoader from "@/components/three/Background3DLoader";
 import { MotionConfig } from "motion/react";
 import "../globals.css";
 
@@ -81,8 +84,14 @@ export default async function LocaleLayout({
       <body className="bg-background text-foreground antialiased">
         {/* reducedMotion="user" — reduced-motion үед transform унтарч, fade үлдэнэ */}
         <MotionConfig reducedMotion="user">
+          {/* Нээлтийн intro overlay */}
+          <Loader />
+          {/* Бүх хэсгийн ард тогтмол 3D дэвсгэр (persistent canvas, Phase 3) */}
+          <Background3DLoader />
           {/* Дээд талын scroll progress зураас */}
           <ScrollProgress />
+          {/* Custom cursor (desktop/хулгана дээр) */}
+          <CustomCursor />
           <NextIntlClientProvider messages={messages}>
             {/* Lenis smooth scroll бүх агуулгыг бүрхэнэ */}
             <SmoothScroll>{children}</SmoothScroll>
